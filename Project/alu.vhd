@@ -19,15 +19,19 @@ architecture behavioral of alu is
             r <= a;
             if add = '1' then
                 r <= a + b;
-            elseif substract = '1' then
+            elsif substract = '1' then
                 r <= a - b
-            elseif multiply = '1' then
+            elsif multiply = '1' then
                 r <= moltiplica(31 downto 0);
             end if;
 
             --se il risultato è maggiore di 2 alla 32 allora si accende il led di overflow
-            if r > 1111111111111111111111111111110 then
+            if r > 0111111111111111111111111111111 then
                 overflow <= '1';
+            elsif r < 1000000000000000000000000000000  then
+                overflow <= '1';
+            elsif
+                overflow <= '0';
             end if;
         end process;
 
