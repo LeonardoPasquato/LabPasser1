@@ -27,4 +27,35 @@ architecture behavioral of debouncer is
                 counter <= (others => '1');
                 candidate_value <= '0';
                 stable_value <= '0';
-            
+                elsif rising_edge( clock ) then
+                    -- See if the signal is stable
+                    if bouncy = candidate_value then
+                       -- It is. Check if it has been stable for long time
+                       if counter = 0 then
+                       -- The signal is stable. Update the stable signal value
+                       stable_value <= candidate_value;
+                       else
+                       -- We still need to wait for the counter to go down
+                       counter <= counter - 1;
+                       end if;
+                    else
+                      -- The signal is not stable. Reset the counter and the candidate stable value
+                      candidate_value <= bouncy;
+                      counter <= ( others => '1' );
+                    end if;
+                end if;
+                end process;
+              
+                -- Create a delayed version of the stable signal
+                process ( clock, reset ) begin
+                if reset = '0' then
+                  delayed_stable_value <= '0';
+                  elsif rising_edge( clock ) then
+                  delayed_stable_value <= stable_value;
+                  end if;
+                end process;
+              
+                -- Generate the pulse
+                pulse <= '1' when stable_value = '1' and delayed_stable_value = '0' else '0';
+              
+              end behavioral;
