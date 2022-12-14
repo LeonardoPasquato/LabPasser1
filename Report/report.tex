@@ -24,6 +24,23 @@
     \rule{\linewidth}{0.1mm}
 
     \section{Obiettivo del laboratorio}
+    Durante questa esperienza di laboratorio si è studiato e progettata una calcolatrice utilizzando 
+    le conoscenze apprese durante il corso.
+    Per il progetto è stata utilizzata la scheda FPGA Nexys4, la quale comprende un doppio display
+    a 7 segmenti con 4 cifre ciascuno, bottoni e switches (?).\par
+    Il progetto della calcolatrice è stato strutturato in modo da poter scegliere attraverso i bottoni quale
+    operazione aritmentica effettuare dati due numeri in ingresso (???da dove???) e mostrare sul display
+    in codifica $BCD$ il risultato ottenuto. Il calcolo viene effettuato da una Arithmetic Logic Unit (ALU). \par
+    Una gestione particolare è stata necessaria nella lettura dei bottoni: un bottone è un componente elettromeccanico, 
+    dunque suscetibile al rumore, che sia meccanico o elettromagnetico. Nello specifico, un bottone è composto
+    da una lamella conduttrice che apre e chiude un circuito a seconda che il pulsante sia premuto o meno: il rumore può 
+    indurre delle attivazioni di breve durata indesiderate. \par
+    È stata quindi progettata una entità $Debouncer$ in grado di filtrare tra i segnali ricevuti dai bottoni solamente 
+    quelli che possono essere effettivamente riconducibili ad un'azione da parte dell'utente fisico.\par
+    È stato gestito inoltre il caso in cui il risultato possa dare un risultato non visualizzabile sul display: è il caso di 
+    $overflow$, in cui il risultato risulta essere di una cifra non decodificabile in $BCD$. \par
+    È stato quindi gestito l'$overflow$ utilizzando un bit specifico per poter accendere un led sulla scheda 
+    Nexys4: nel momento in cui è presente un caso di $overflow$, verrà attivato il corrispondente led. \par
 
     \section{Componenti}
     \begin{itemize}
