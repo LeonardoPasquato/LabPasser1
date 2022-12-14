@@ -1,0 +1,4 @@
+v 4
+file . "debouncer.vhd" "4997cd0adbe0fb541cd540e9cbd72d40c0d24f01" "20221214100134.450":
+  entity debouncer at 3( 24) + 0 on 11;
+  architecture behavioral of debouncer at 18( 280) + 0 on 12;
